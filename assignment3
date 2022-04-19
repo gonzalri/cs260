@@ -1,1 +1,105 @@
+#include <iostream>
 
+using std::cout;
+using std::cin;
+using std::endl;
+
+
+class Node {
+    public:
+        int value;
+        Node *next;
+};
+
+
+ 
+void printList(Node* head)  {  /* test to check and print contents of queue */
+    Node *tptr = head;
+    while (tptr != NULL) {
+        cout << tptr->value << endl;
+        tptr = tptr->next;
+    }
+
+}
+
+
+int nodeInput() {
+    int userInput;
+    cout << "Please enter a value: ";
+    cin >> userInput;
+    return userInput;
+}
+  
+
+
+int main() {
+    
+    Node *n;
+    Node *temp;
+    Node *head;
+    Node *rear;
+
+    head = rear = NULL;
+    if(head == NULL) {
+        cout << "Queue is currently empty" << endl; /* test to see if queue is empty */
+    }
+    if(rear == NULL) 
+        rear = head = n;    
+    else {
+        rear->next = n;
+        rear = n;
+    }
+
+    int userInput;
+    cout << "Would you like to add to the queue? Yes[1] No[2]";
+    cin >> userInput;
+    if(userInput == 1) {
+        n = new Node;
+        n->value = nodeInput();
+        head = n;
+        rear = n;
+
+        n = new Node;
+        n->value = nodeInput();
+        rear->next = n;
+        rear = rear->next;
+
+        n = new Node;
+        n->value = nodeInput();
+        rear->next = n;
+        rear = rear->next;
+        
+        n = new Node;
+        n->value = nodeInput();
+        rear->next = n;
+        n->next = NULL;
+    }
+    else if (userInput == 2)  {
+        cout << "Goodbye" << endl;
+        return -1;
+    }
+
+    cout << "Elements in queue are: " << endl;
+    printList(head); 
+    
+    int userInput2;
+    cout << "Would you like to dequeue the front value? Yes[1] No[2]";
+    cin >> userInput2;
+    if(userInput2 == 1) {
+        temp = head;
+        int tempValue = head->value;
+        head = head->next;
+        delete temp;
+        cout << "Value dequeued from the front is: " << tempValue << endl; /* test to see the value dequeued was correct */
+    }
+    else if (userInput2 == 2)  {
+        cout << "Goodbye" << endl;
+        return -1;
+    }
+        
+    cout << "Updated elements in the queue are: " << endl;
+    printList(head); 
+
+
+    return -1;
+}
